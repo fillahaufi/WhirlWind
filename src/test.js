@@ -64,7 +64,7 @@ function createScene(){
 	pathAngleValues=[1.52,1.57,1.62];
     sceneWidth=window.innerWidth;
     sceneHeight=window.innerHeight;
-    scene = new THREE.Scene();//the 3d scene
+    scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2( 0xf0fff0, 0.14 );
     camera = new THREE.PerspectiveCamera( 60, sceneWidth / sceneHeight, 0.1, 1000 );//perspective camera
     renderer = new THREE.WebGLRenderer({alpha:true});//renderer with transparent backdrop
@@ -191,11 +191,16 @@ function addHero(){
 	heroSphere.position.x=currentLane;
 }
 function addWorld(){
-	var sides=40;
-	var tiers=40;
-	var sphereGeometry = new THREE.SphereGeometry( worldRadius, sides,tiers);
-	var sphereMaterial = new THREE.MeshStandardMaterial( { color: 	
-		0x3cf ,shading:THREE.FlatShading} )
+	var sphereGeometry = new THREE.SphereGeometry( worldRadius, 40, 40);
+	var sphereMaterial = new THREE.MeshStandardMaterial( { color: 0x3cf ,shading:THREE.FlatShading} )
+		
+	rollingGroundSphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+	rollingGroundSphere.receiveShadow = true;
+	rollingGroundSphere.castShadow = false;
+	rollingGroundSphere.rotation.z = -Math.PI/2;
+	scene.add( rollingGroundSphere );
+	rollingGroundSphere.position.y = -24;
+	rollingGroundSphere.position.z = 2;
 	
 	// var vertexIndex;
 	// var vertexVector= new THREE.Vector3();
@@ -227,13 +232,7 @@ function addWorld(){
 	// 		sphereGeometry.vertices[i+vertexIndex]=(vertexVector.add(offset));
 	// 	}
 	// }
-	rollingGroundSphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-	rollingGroundSphere.receiveShadow = true;
-	rollingGroundSphere.castShadow=false;
-	rollingGroundSphere.rotation.z=-Math.PI/2;
-	scene.add( rollingGroundSphere );
-	rollingGroundSphere.position.y=-24;
-	rollingGroundSphere.position.z=2;
+	
 	//addWorldTrees();
 }
 function addLight(){
@@ -243,6 +242,7 @@ function addLight(){
 	sun.position.set( 12,6,-7 );
 	sun.castShadow = true;
 	scene.add(sun);
+
 	//Set up shadow properties for the sun light
 	sun.shadow.mapSize.width = 256;
 	sun.shadow.mapSize.height = 256;
