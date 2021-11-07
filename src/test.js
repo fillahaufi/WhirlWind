@@ -1,6 +1,7 @@
 /*global THREE*/
 /*global Stats*/
-window.addEventListener('load', init, false);
+// window.addEventListener('load', init, false);
+document.getElementById('myForm').addEventListener("submit", init);
 
 var sceneWidth;
 var sceneHeight;
@@ -69,7 +70,7 @@ function createScene(){
     renderer.shadowMap.enabled = true;//enable shadow
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setSize( sceneWidth, sceneHeight );
-    dom = document.getElementById('TutContainer');
+    dom = document.getElementById('game');
 	dom.appendChild(renderer.domElement);
 	stats = new Stats();
 	dom.appendChild(stats.dom);

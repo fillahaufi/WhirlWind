@@ -18,8 +18,10 @@
     </style>
 
     <link rel="stylesheet" href="style.css">
-
-    <script src="three.min.js"></script>
+    <script type="text/javascript" src="lib/three.min.js"></script>
+    <script type="text/javascript" src="lib/stats.min.js"></script>
+    <script type="text/javascript" src="src/OrbitControls.js"></script>
+    <!-- <script type="text/javascript" src="src/endlessroller.js"></script> -->
 
 </head>
 
@@ -45,8 +47,8 @@
         </form>
     </div>
     <!-- <div id="demo"></div> -->
-    <canvas id="game" style="display: none;"></canvas>
-    <script type="module" src="test.js"></script>
+    <div id="game" style="display: none;"></div>
+    <script type="module" src="/src/test.js"></script>
 </body>
 <script>
     function myFunction() {
