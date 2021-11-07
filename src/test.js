@@ -41,6 +41,8 @@ var stats;
 var scoreText;
 var score;
 var hasCollided;
+var difficulty;
+var radres;
 
 function init() {
 	// set up the scene
@@ -73,7 +75,7 @@ function createScene(){
     dom = document.getElementById('game');
 	dom.appendChild(renderer.domElement);
 	stats = new Stats();
-	dom.appendChild(stats.dom);
+	// dom.appendChild(stats.dom);
 	//createTreesPool();
 	addWorld();
 	//addHero();
@@ -97,6 +99,18 @@ function createScene(){
 	window.addEventListener('resize', onWindowResize, false);//resize callback
 
 	document.onkeydown = handleKeyDown;
+
+    radres = document.querySelector('input[name="group"]:checked').value;
+	difficulty = document.createElement('div');
+	difficulty.style.position = 'absolute';
+	difficulty.style.width = 100;
+	difficulty.style.height = 100;
+	//difficulty.style.backgroundColor = "blue";
+	// difficulty.innerHTML = "0";
+	difficulty.innerHTML = radres;
+	difficulty.style.top = 10 + 'px';
+	difficulty.style.left = 100 + 'px';
+	document.body.appendChild(difficulty);
 	
 	scoreText = document.createElement('div');
 	scoreText.style.position = 'absolute';
@@ -104,10 +118,10 @@ function createScene(){
 	scoreText.style.width = 100;
 	scoreText.style.height = 100;
 	//scoreText.style.backgroundColor = "blue";
-	scoreText.innerHTML = "0";
-	scoreText.style.top = 10 + 'px';
+	// scoreText.innerHTML = "0";
+	scoreText.style.top = 30 + 'px';
 	scoreText.style.left = 100 + 'px';
-	document.body.appendChild(scoreText);
+	// document.body.appendChild(scoreText);
 }
 function addExplosion(){
 	particleGeometry = new THREE.Geometry();
@@ -183,36 +197,36 @@ function addWorld(){
 	var sphereMaterial = new THREE.MeshStandardMaterial( { color: 	
 		0x3cf ,shading:THREE.FlatShading} )
 	
-	var vertexIndex;
-	var vertexVector= new THREE.Vector3();
-	var nextVertexVector= new THREE.Vector3();
-	var firstVertexVector= new THREE.Vector3();
-	var offset= new THREE.Vector3();
-	var currentTier=1;
-	var lerpValue=0.5;
-	var heightValue;
-	var maxHeight=0.07;
-	for(var j=1;j<tiers-2;j++){
-		currentTier=j;
-		for(var i=0;i<sides;i++){
-			vertexIndex=(currentTier*sides)+1;
-			vertexVector=sphereGeometry.vertices[i+vertexIndex].clone();
-			if(j%2!==0){
-				if(i==0){
-					firstVertexVector=vertexVector.clone();
-				}
-				nextVertexVector=sphereGeometry.vertices[i+vertexIndex+1].clone();
-				if(i==sides-1){
-					nextVertexVector=firstVertexVector;
-				}
-				lerpValue=(Math.random()*(0.75-0.25))+0.25;
-				vertexVector.lerp(nextVertexVector,lerpValue);
-			}
-			heightValue=(Math.random()*maxHeight)-(maxHeight/2);
-			offset=vertexVector.clone().normalize().multiplyScalar(heightValue);
-			sphereGeometry.vertices[i+vertexIndex]=(vertexVector.add(offset));
-		}
-	}
+	// var vertexIndex;
+	// var vertexVector= new THREE.Vector3();
+	// var nextVertexVector= new THREE.Vector3();
+	// var firstVertexVector= new THREE.Vector3();
+	// var offset= new THREE.Vector3();
+	// var currentTier=1;
+	// var lerpValue=0.5;
+	// var heightValue;
+	// var maxHeight=0.07;
+	// for(var j=1;j<tiers-2;j++){
+	// 	currentTier=j;
+	// 	for(var i=0;i<sides;i++){
+	// 		vertexIndex=(currentTier*sides)+1;
+	// 		vertexVector=sphereGeometry.vertices[i+vertexIndex].clone();
+	// 		if(j%2!==0){
+	// 			if(i==0){
+	// 				firstVertexVector=vertexVector.clone();
+	// 			}
+	// 			nextVertexVector=sphereGeometry.vertices[i+vertexIndex+1].clone();
+	// 			if(i==sides-1){
+	// 				nextVertexVector=firstVertexVector;
+	// 			}
+	// 			lerpValue=(Math.random()*(0.75-0.25))+0.25;
+	// 			vertexVector.lerp(nextVertexVector,lerpValue);
+	// 		}
+	// 		heightValue=(Math.random()*maxHeight)-(maxHeight/2);
+	// 		offset=vertexVector.clone().normalize().multiplyScalar(heightValue);
+	// 		sphereGeometry.vertices[i+vertexIndex]=(vertexVector.add(offset));
+	// 	}
+	// }
 	rollingGroundSphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
 	rollingGroundSphere.receiveShadow = true;
 	rollingGroundSphere.castShadow=false;
