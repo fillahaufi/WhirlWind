@@ -40,21 +40,17 @@
             <div class="button-group">
                 <label class="button-group__btn"><input type="radio" name="group" value="easy"/> <span class="button-group__label">Easy</span></label>
                 <label class="button-group__btn"><input type="radio" name="group" value="hard"/> <span class="button-group__label">Hard</span></label>
-                <!-- <label class="button-group__btn"><input type="radio" name="group" /> <span class="button-group__label">Gum</span></label>
-                    <label class="button-group__btn"><input type="radio" name="group" /> <span class="button-group__label">The world</span></label> -->
             </div>
             <input id="submit-btn" type="submit" value="Play">
         </form>
     </div>
     <!-- <div id="demo"></div> -->
-    <div id="game" style="display: block;"></div>
+    <div id="game" style="display: none;"></div>
     <script type="module" src="/src/test.js"></script>
 </body>
 <script>
     function myFunction() {
         event.preventDefault();
-        // var radres = document.querySelector('input[name="group"]:checked').value;
-        // document.getElementById("demo").innerHTML = radres;
         document.getElementById("game").style.display = 'block'
         document.getElementById("menu-btn").style.display = 'none'
     }
