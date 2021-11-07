@@ -1,0 +1,56 @@
+.button-group {
+  display: table;
+}
+.button-group__btn {
+  cursor: pointer;
+  display: table-cell;
+  position: relative;
+}
+.button-group__btn input[type="radio"],
+.button-group__btn input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+}
+.button-group__label {
+  background-color: #777;
+  border-bottom: 1px solid #444;
+  border-right: 1px solid #444;
+  border-top: 1px solid #444;
+  color: #ccc;
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 20px;
+  text-align: center;
+}
+.button-group__btn:first-child .button-group__label {
+  border-left: 1px solid #444;
+  border-radius: 5px 0 0 5px;
+}
+.button-group__btn:last-child .button-group__label {
+  border-radius: 0 5px 5px 0;
+}
+input:checked + .button-group__label {
+  background-color: #999;
+  border-bottom-color: #666;
+  border-top-color: #666;
+  color: #fff;
+}
+.button-group__btn:first-child input:checked + .button-group__label {
+  border-left-color: #666;
+}
+.button-group__btn:last-child input:checked + .button-group__label {
+  border-right-color: #666;
+}
+
+#submit-btn {
+  background-color: green;
+  padding: 15px;
+  border-style: none;
+  border-radius: 5px;
+  margin-top: 30px;
+  width: 30%;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+}

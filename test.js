@@ -7,7 +7,7 @@
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0x474747);
 
-        renderer = new THREE.WebGLRenderer();   
+        renderer = new THREE.WebGLRenderer( { canvas: game } );   
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
         
