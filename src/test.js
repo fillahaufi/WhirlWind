@@ -1,3 +1,8 @@
+import * as THREE from "../lib/three.module.js";
+// import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js";
+import { OrbitControls } from "./OrbitControls.js";
+import { FBXLoader } from './FBXLoader.js';
+
 document.getElementById('myForm').addEventListener("submit", init);
 
 var sceneWidth;
@@ -14,6 +19,11 @@ var rollingSpeed=0.008;
 var worldRadius=26;
 var difficulty;
 var radres;
+var getHero;
+var hero;
+var mixer;
+
+var clock = new THREE.Clock();
 
 function init() {
 	// set up the scene
@@ -41,10 +51,11 @@ function createScene(){
 
 	addWorld();
 	addLight();
+	addModel();
 	
 	camera.position.z = 6.5;
 	camera.position.y = 3.5;
-	orbitControl = new THREE.OrbitControls( camera, renderer.domElement ); //helper to rotate around in scene
+	orbitControl = new OrbitControls( camera, renderer.domElement ); //helper to rotate around in scene
 	
 	orbitControl.enableZoom = true;
 
@@ -63,16 +74,28 @@ function createScene(){
 	//difficulty.style.backgroundColor = "blue";
 	// difficulty.innerHTML = "0";
 	difficulty.innerHTML = radres;
-	difficulty.style.top = 10 + 'px';
+	difficulty.style.top = 30 + 'px';
 	difficulty.style.left = 100 + 'px';
 	document.body.appendChild(difficulty);
+
+    getHero = document.querySelector('input[name="hero"]:checked').value;
+	hero = document.createElement('div');
+	hero.style.position = 'absolute';
+	hero.style.width = 100;
+	hero.style.height = 100;
+	//hero.style.backgroundColor = "blue";
+	// hero.innerHTML = "0";
+	hero.innerHTML = getHero;
+	hero.style.top = 10 + 'px';
+	hero.style.left = 100 + 'px';
+	document.body.appendChild(hero);
 }
 
 function addWorld(){
 	var sides=50;
 	var tiers=50;
 	var sphereGeometry = new THREE.SphereGeometry( worldRadius, sides,tiers);
-	var sphereMaterial = new THREE.MeshStandardMaterial({color: "rgb(139, 69, 19)", shading:THREE.FlatShading})
+	var sphereMaterial = new THREE.MeshStandardMaterial({color: "rgb(139, 69, 19)", flatShading:THREE.FlatShading})
 	
 	rollingGroundSphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
 	rollingGroundSphere.receiveShadow = true;
@@ -100,10 +123,36 @@ function addLight(){
 	sun.shadow.camera.far = 50 ;
 }
 
+function addModel() {
+	var loader = new FBXLoader();
+	loader.load("model/zidanRunning.fbx", function (model) {
+		mixer = new THREE.AnimationMixer(model);
+
+		var action = mixer.clipAction(model.animations[0]);
+		action.play();
+
+		model.traverse(function (child) {
+			if (child.isMesh) {
+				child.castShadow = true;
+				child.receiveShadow = true;
+			}
+		});
+		model.scale.x = model.scale.y = model.scale.z = 0.002;
+		model.position.set(0, 1.8, 4.5);
+		model.rotation.set(0, Math.PI, 0);
+		scene.add(model);
+	});
+}
+
 function update(){
     //animate
+	const delta = clock.getDelta();
+
+	if (mixer) mixer.update(delta);
+
+
     rollingGroundSphere.rotation.x += rollingSpeed;
-    
+    // objs.forEach(({mixer}) => {mixer.update(clock.getDelta());});
     render();
 	requestAnimationFrame(update); //request next update
 }

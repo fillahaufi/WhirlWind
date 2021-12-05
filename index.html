@@ -18,8 +18,9 @@
     </style>
 
     <link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="lib/three.min.js"></script>
-    <script type="text/javascript" src="src/OrbitControls.js"></script>
+    <!-- <script type="text/javascript" src="lib/three.min.js"></script> -->
+    <!-- <script type="text/javascript" src="src/OrbitControls.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/three@0.117.1/examples/jsm/loaders/FBXLoader.js"></script> -->
     <!-- <script type="text/javascript" src="src/endlessroller.js"></script> -->
 
 </head>
@@ -29,24 +30,60 @@
         <h1>WhirlWind</h1>
         <p>Kelompok grafkom mantap</p>
     </div>
-    <div id="menu-btn" style="background-color: #474747;  text-align: -webkit-center; padding: 50px;">
-        <div style="margin-bottom: 50px;">
-            <h2 style="color: white;">HIGHSCORE :</h2>
-            <h2 style="color: white;">100</h2>
-        </div>
-        <h2 style="color: white;">Pilih level :</h2>
-        <form id="myForm" action="" onsubmit="return myFunction()">
-            <div class="button-group">
-                <label class="button-group__btn"><input type="radio" name="group" value="easy"/> <span class="button-group__label">Easy</span></label>
-                <label class="button-group__btn"><input type="radio" name="group" value="hard"/> <span class="button-group__label">Hard</span></label>
+    <div id="menu-btn" style="background-color: #474747;  text-align: -webkit-center; padding: 50px; display: flex; flex-direction: row;">
+        <div style="display: flex; flex-direction: column; width: 60%;">
+            <div style="margin-bottom: 50px;">
+                <h2 style="color: white;">HIGHSCORE :</h2>
+                <h2 style="color: white;">100</h2>
             </div>
-            <input id="submit-btn" type="submit" value="Play">
-        </form>
+            <form id="myForm" action="" onsubmit="return myFunction()">
+                <h2 style="color: white;">PILIH LEVEL :</h2>
+                <div class="button-group">
+                    <label class="button-group__btn"><input type="radio" name="group" value="easy" checked/> <span class="button-group__label">Easy</span></label>
+                    <label class="button-group__btn"><input type="radio" name="group" value="hard"/> <span class="button-group__label">Hard</span></label>
+                </div>
+                <h2 style="color: white;">CHOOSE GAME HERO</h2>
+                <div class="button-group">
+                    <label class="button-group__btn"><input type="radio" name="hero" value="Hitler" checked/> <span
+                            class="button-group__label">Hitler</span></label>
+                    <label class="button-group__btn"><input type="radio" name="hero" value="Stalin" /> <span
+                            class="button-group__label">Stalin</span></label>
+                    <label class="button-group__btn"><input type="radio" name="hero" value="Churchill" /> <span
+                            class="button-group__label">Churchill</span></label>
+                    <label class="button-group__btn"><input type="radio" name="hero" value="Mao" /> <span
+                            class="button-group__label">Mao</span></label>
+                    <label class="button-group__btn"><input type="radio" name="hero" value="Truman" /> <span
+                            class="button-group__label">Truman</span></label>
+                </div>
+                <input id="submit-btn" type="submit" value="Play">
+            </form>
+        </div>
+        <div id="Hitler" class="desc" style="display: flex; width: 40%; pointer-events: none;"></div>
+        <div id="Stalin" class="desc" style="display: none; width: 40%; pointer-events: none;"></div>
+        <div id="Churchill" class="desc" style="display: none; width: 40%; pointer-events: none;"></div>
     </div>
     <!-- <div id="demo"></div> -->
     <div id="game" style="display: none;"></div>
-    <script type="module" src="/src/test.js"></script>
+    <script type="module" src="src/test.js"></script>
+    <script type="module" src="src/Hitler.js"></script>
+    <script type="module" src="src/Stalin.js"></script>
+    <script type="module" src="src/Churchill.js"></script>
 </body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $(document).ready(function () {
+        $("input[name$='hero']").click(function () {
+            var test = $(this).val();
+
+            $("div.desc").hide();
+            $("#" + test).show();
+        });
+    });
+</script>
 <script>
     function myFunction() {
         event.preventDefault();
