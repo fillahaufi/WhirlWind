@@ -1,6 +1,6 @@
-.button-group {
+/* .button-group {
   display: table;
-}
+} */
 .button-group__btn {
   cursor: pointer;
   display: table-cell;
