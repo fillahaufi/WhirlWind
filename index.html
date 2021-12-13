@@ -25,46 +25,69 @@
 
 </head>
 
-<body>
+<body style="margin:0;">
     <div class="menu" style="text-align: center;">
         <h1>WhirlWind</h1>
         <p>Kelompok grafkom mantap</p>
     </div>
-    <div id="menu-btn" style="background-color: #474747;  text-align: -webkit-center; padding: 50px; display: flex; flex-direction: row;">
-        <div style="display: flex; flex-direction: column; width: 60%;">
-            <div style="margin-bottom: 50px;">
-                <h2 style="color: white;">HIGHSCORE :</h2>
-                <h2 style="color: white;">100</h2>
-            </div>
-            <form id="myForm" action="" onsubmit="return myFunction()">
-                <h2 style="color: white;">PILIH LEVEL :</h2>
-                <div class="button-group">
-                    <label class="button-group__btn"><input type="radio" name="group" value="easy" checked/> <span class="button-group__label">Easy</span></label>
-                    <label class="button-group__btn"><input type="radio" name="group" value="hard"/> <span class="button-group__label">Hard</span></label>
-                </div>
-                <h2 style="color: white;">CHOOSE GAME HERO</h2>
-                <div class="button-group">
-                    <label class="button-group__btn"><input type="radio" name="hero" value="Hitler" checked/> <span
-                            class="button-group__label">Hitler</span></label>
-                    <label class="button-group__btn"><input type="radio" name="hero" value="Stalin" /> <span
-                            class="button-group__label">Stalin</span></label>
-                    <label class="button-group__btn"><input type="radio" name="hero" value="Churchill" /> <span
-                            class="button-group__label">Churchill</span></label>
-                </div>
-                <input id="submit-btn" type="submit" value="Play">
-            </form>
-        </div>
-        <div id="Hitler" class="desc" style="display: flex; width: 40%; pointer-events: none;"></div>
-        <div id="Stalin" class="desc" style="display: none; width: 40%; pointer-events: none;"></div>
-        <div id="Churchill" class="desc" style="display: none; width: 40%; pointer-events: none;"></div>
+    <!-- <div id="loader"> Loading...</div> -->
+    <div id="loader-div" class="loader-div" style="display: flex; flex-direction: column;">
+        <span class="loader">
+            <span></span>
+            <span></span>
+        </span>
+        <p>Loading...</p>
     </div>
+    <span id="myDiv" class="animate-bottom" style="display: none;">
+        <div id="menu-btn" style="background-color: #474747;  text-align: -webkit-center; padding: 50px; display: flex; flex-direction: row;">
+            <div style="display: flex; flex-direction: column; width: 60%;">
+                <div style="margin-bottom: 50px;">
+                    <h2 style="color: white;">HIGHSCORE :</h2>
+                    <h2 style="color: white;">100</h2>
+                </div>
+                <form id="myForm" action="" onsubmit="return myFunction()">
+                    <h2 style="color: white;">PILIH LEVEL :</h2>
+                    <div class="button-group">
+                        <label class="button-group__btn"><input type="radio" name="group" value="easy" checked/> <span class="button-group__label">Easy</span></label>
+                        <label class="button-group__btn"><input type="radio" name="group" value="hard"/> <span class="button-group__label">Hard</span></label>
+                    </div>
+                    <h2 style="color: white;">CHOOSE GAME HERO</h2>
+                    <div class="button-group">
+                        <label class="button-group__btn"><input type="radio" name="hero" value="Hitler" checked/> <span
+                                class="button-group__label">Hitler</span></label>
+                        <label class="button-group__btn"><input type="radio" name="hero" value="Stalin" /> <span
+                                class="button-group__label">Stalin</span></label>
+                        <label class="button-group__btn"><input type="radio" name="hero" value="Churchill" /> <span
+                                class="button-group__label">Churchill</span></label>
+                    </div>
+                    <input id="submit-btn" type="submit" value="Play">
+                </form>
+            </div>
+            <div id="Hitler" class="desc" style="display: flex; width: 40%; pointer-events: none;"></div>
+            <div id="Stalin" class="desc" style="display: none; width: 40%; pointer-events: none;"></div>
+            <div id="Churchill" class="desc" style="display: none; width: 40%; pointer-events: none;"></div>
+        </div>
+    </span>
     <!-- <div id="demo"></div> -->
     <div id="game" style="display: none;"></div>
     <script type="module" src="src/test.js"></script>
-    <script type="module" src="src/Hitler.js"></script>
+    <script type="module" src="src/Hitler.js" onload="myFunction2()"></script>
     <script type="module" src="src/Stalin.js"></script>
     <script type="module" src="src/Churchill.js"></script>
 </body>
+
+<script>
+    var myVar;
+
+    function myFunction2() {
+        myVar = setTimeout(showPage, 9000);
+    }
+
+    function showPage() {
+        document.getElementById("loader-div").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
+    }
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
