@@ -60,7 +60,7 @@
                         <label class="button-group__btn"><input type="radio" name="hero" value="Churchill" /> <span
                                 class="button-group__label">Churchill</span></label>
                     </div>
-                    <input id="submit-btn" type="submit" value="Play">
+                    <input id="submit-btn" type="submit" value="Play" style="cursor: pointer;">
                 </form>
             </div>
             <div id="Hitler" class="desc" style="display: flex; width: 40%; pointer-events: none;"></div>
@@ -71,16 +71,16 @@
     <!-- <div id="demo"></div> -->
     <div id="game" style="display: none;"></div>
     <script type="module" src="src/test.js"></script>
-    <script type="module" src="src/Hitler.js" onload="myFunction2()"></script>
+    <script type="module" src="src/Hitler.js"></script>
     <script type="module" src="src/Stalin.js"></script>
-    <script type="module" src="src/Churchill.js"></script>
+    <script type="module" src="src/Churchill.js" onload="myFunction2()"></script>
 </body>
 
 <script>
     var myVar;
 
     function myFunction2() {
-        myVar = setTimeout(showPage, 9000);
+        myVar = setTimeout(showPage, 8000);
     }
 
     function showPage() {
