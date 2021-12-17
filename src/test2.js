@@ -368,14 +368,14 @@ function createTrunk()
 function update() 
 {
     //animate
-    console.log(radres);
+    // console.log(radres);
     if(radres == 'easy') {
         rollingSpeed = 0.006;
     }
     else if(radres == 'hard') {
         rollingSpeed = 0.008;
     }
-    console.log(rollingSpeed);
+    // console.log(rollingSpeed);
     const delta = clock.getDelta();
     if (mixer) mixer.update(delta);
     heromodel.position.x=THREE.Math.lerp(heromodel.position.x, currentLane, 700*clock.getDelta());//clock.getElapsedTime());
@@ -392,7 +392,7 @@ function update()
             score += 4 * Math.round(trunkReleaseInterval);
             scoreText.innerHTML = score.toString();
             
-            if (score > localStorage.highScore) {
+            if (score > highScore) {
                 highScore = score;
                 elementHighScore.innerHTML = highScore;
                 localStorage.setItem("highScore", highScore);
