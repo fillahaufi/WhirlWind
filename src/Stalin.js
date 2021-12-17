@@ -1,5 +1,4 @@
 import * as THREE from "../lib/three.module.js";
-// import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js";
 import { OrbitControls } from "./OrbitControls.js";
 import { FBXLoader } from './FBXLoader.js';
 
@@ -18,51 +17,50 @@ var mixer;
 
 var clock = new THREE.Clock();
 
-function init() {
+function init() 
+{
 	// set up the scene
 	createScene();
 
-	//call game loop
+	// call game loop
 	update();
 }
 
-function createScene(){
-    
+function createScene()
+{    
 	dom = document.getElementById('Stalin');
 	sceneWidth= 600;
     sceneHeight= 500;
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0x474747 )
     scene.fog = new THREE.FogExp2( 0xf0fff0, 0.14 );
-    camera = new THREE.PerspectiveCamera( 60, sceneWidth / sceneHeight, 0.1, 1000 );//perspective camera
-    renderer = new THREE.WebGLRenderer({alpha:true});//renderer with transparent backdrop
+    camera = new THREE.PerspectiveCamera( 60, sceneWidth / sceneHeight, 0.1, 1000 );
+    renderer = new THREE.WebGLRenderer({alpha:true});
     renderer.setClearColor(0xfffafa, 1); 
-    renderer.shadowMap.enabled = true; //enable shadow
+    renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setSize( sceneWidth, sceneHeight );
     
 	dom.appendChild(renderer.domElement);
 
-	// addWorld();
 	addLight();
 	addModel();
 	
 	camera.position.z = 5.6;
 	camera.position.y = 2.35;
-	orbitControl = new OrbitControls( camera, renderer.domElement ); //helper to rotate around in scene
 	
+	orbitControl = new OrbitControls( camera, renderer.domElement ); // helper to rotate around in scene
 	// orbitControl.enableZoom = true;
-
 	orbitControl.minPolarAngle = 1.1;
 	orbitControl.maxPolarAngle = 1.1;
 	orbitControl.minAzimuthAngle = -0.2;
 	orbitControl.maxAzimuthAngle = 0.2;
 	
-	window.addEventListener('resize', onWindowResize, false); //resize callback
-
+	window.addEventListener('resize', onWindowResize, false); // resize callback
 }
 
-function addLight(){
+function addLight()
+{
 	var hemisphereLight = new THREE.HemisphereLight(0xfffafa,0x000000, .9)
 	scene.add(hemisphereLight);
 	
@@ -70,23 +68,28 @@ function addLight(){
 	sun.position.set( 12,6,-7 );
 	sun.castShadow = true;
 	scene.add(sun);
-	//Set up shadow properties for the sun light
+	
+	// shadow properties for the sun light
 	sun.shadow.mapSize.width = 256;
 	sun.shadow.mapSize.height = 256;
 	sun.shadow.camera.near = 0.5;
 	sun.shadow.camera.far = 50 ;
 }
 
-function addModel() {
+function addModel() 
+{
 	var loader = new FBXLoader();
-	loader.load("model/zombieDancing.fbx", function (model) {
+	loader.load("model/zombieDancing.fbx", function (model) 
+	{
 		mixer = new THREE.AnimationMixer(model);
 
 		var action = mixer.clipAction(model.animations[0]);
 		action.play();
 
-		model.traverse(function (child) {
-			if (child.isMesh) {
+		model.traverse(function (child) 
+		{
+			if (child.isMesh) 
+			{
 				child.castShadow = true;
 				child.receiveShadow = true;
 			}
@@ -98,27 +101,25 @@ function addModel() {
 	});
 }
 
-function update(){
-    //animate
+function update()
+{
+    // animate
 	const delta = clock.getDelta();
-
 	if (mixer) mixer.update(delta);
-
     render();
-	requestAnimationFrame(update); //request next update
+	requestAnimationFrame(update); // request next update
 }
 
-function render(){
-    renderer.render(scene, camera); //draw
+function render()
+{
+    renderer.render(scene, camera); // draw
 }
 
-function onWindowResize() {
-	//resize & align
+function onWindowResize() 
+{
 	sceneHeight = window.innerHeight;
 	sceneWidth = window.innerWidth;
-	
 	renderer.setSize(sceneWidth, sceneHeight);
-	
 	camera.aspect = sceneWidth/sceneHeight;
 	camera.updateProjectionMatrix();
 }
