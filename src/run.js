@@ -436,7 +436,6 @@ function doTrunkLogic()
                 console.log("hit");
                 hasCollided = true;
                 if(!alert('WHY R U SO NOOB, HUH? RESTART?')){window.location.reload();}
-                // explode();
             }
         }
     });
@@ -460,7 +459,6 @@ function render()
 
 function onWindowResize() 
 {
-    //resize & align
     sceneHeight = window.innerHeight;
     sceneWidth = window.innerWidth;
     renderer.setSize(sceneWidth, sceneHeight);
