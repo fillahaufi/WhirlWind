@@ -18,19 +18,19 @@
     </style>
 
     <link rel="stylesheet" href="style.css">
-    <!-- <script type="text/javascript" src="lib/three.min.js"></script> -->
+    <script type="text/javascript" src="lib/three.min.js"></script>
     <!-- <script type="text/javascript" src="src/OrbitControls.js"></script> -->
+    <script type="module" src="src/test2.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/three@0.117.1/examples/jsm/loaders/FBXLoader.js"></script> -->
     <!-- <script type="text/javascript" src="src/endlessroller.js"></script> -->
 
 </head>
 
 <body style="margin:0;">
-    <div class="menu" style="text-align: center;">
+    <div class="menu" style="text-align: center; z-index: 99;">
         <h1>WhirlWind</h1>
         <p>Kelompok grafkom mantap</p>
     </div>
-    <!-- <div id="loader"> Loading...</div> -->
     <div id="loader-div" class="loader-div" style="display: flex; flex-direction: column;">
         <span class="loader">
             <span></span>
@@ -68,9 +68,9 @@
             <div id="Churchill" class="desc" style="display: none; width: 40%; pointer-events: none;"></div>
         </div>
     </span>
-    <!-- <div id="demo"></div> -->
+    <!-- <div id="demo" onload="myFunction2()"></div> -->
     <div id="game" style="display: none;"></div>
-    <script type="module" src="src/test.js"></script>
+    <!-- <script type="module" src="src/test.js"></script> -->
     <script type="module" src="src/Hitler.js"></script>
     <script type="module" src="src/Stalin.js"></script>
     <script type="module" src="src/Churchill.js" onload="myFunction2()"></script>
