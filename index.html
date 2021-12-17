@@ -21,7 +21,6 @@
     <!-- <script type="text/javascript" src="lib/three.min.js"></script> -->
     <!-- <script type="text/javascript" src="src/OrbitControls.js"></script> -->
     <script type="module" src="src/test2.js"></script>
-
 </head>
 
 <body style="margin:0;">
@@ -33,10 +32,6 @@
         <p>Loading...</p>
     </div>
     <span id="myDiv" class="animate-bottom" style="display: none;">
-        <div class="menu" style="text-align: center; z-index: 99;">
-            <h1>WhirlWind</h1>
-            <p>Kelompok grafkom mantap</p>
-        </div>
         <div id="menu-btn" style="background-color: #474747;  text-align: -webkit-center; padding: 50px; display: flex; flex-direction: row;">
             <div style="display: flex; flex-direction: column; width: 60%;">
                 <div style="margin-bottom: 50px;">
@@ -83,7 +78,6 @@
 
     function showPage() {
         document.getElementById("highscore").innerHTML = localStorage.highScore;
-
         document.getElementById("loader-div").style.display = "none";
         document.getElementById("myDiv").style.display = "block";
     }
