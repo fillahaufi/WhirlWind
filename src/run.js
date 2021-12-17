@@ -1,8 +1,6 @@
 import * as THREE from "../lib/three.module.js";
-// import { THREE as THREEE } from "../lib/three.min.js";
 import { OrbitControls } from "./OrbitControls.js";
 import { FBXLoader } from './FBXLoader.js';
-
 
 // window.addEventListener('load', init, false);
 document.getElementById('myForm').addEventListener("submit", init);
@@ -14,7 +12,6 @@ var scene;
 var renderer;
 var dom;
 var sun;
-var ground;
 var orbitControl;
 var rollingGroundSphere;
 var rollingSpeed; //0.008
@@ -27,7 +24,6 @@ var middleLane = 0;
 var currentLane;
 var clock;
 var trunkReleaseInterval = 1.15; //0.5
-var lastTrunkReleaseTime = 0;
 var trunksInPath;
 var trunksPool;
 var particleGeometry;
@@ -46,7 +42,6 @@ var heromodel = new THREE.Object3D();
 var elementHighScore = document.getElementById("highscore");
 // elementHighScore = localStorage.getItem("highScore");
 var highScore = 0;
-
 var clock = new THREE.Clock();
 
 function init() 
@@ -131,7 +126,7 @@ function createScene()
 
     scoreText = document.createElement('div');
     scoreText.style.position = 'absolute';
-    //text2.style.zIndex = 1;    // if you still don't see the label, try uncommenting this
+    //text2.style.zIndex = 1;   
     scoreText.style.width = 100;
     scoreText.style.height = 100;
     //scoreText.style.backgroundColor = "blue";
@@ -144,26 +139,6 @@ function createScene()
     createTrunksPool();
     addWorld();
     addLight();
-    // addExplosion();
-}
-
-// mengatur efek ledakan bersama dengan doTreeLogic, explode, dan doExplosionLogic
-function addExplosion() 
-{
-    particleGeometry = new THREE.BoxGeometry();
-    for (var i = 0; i < particleCount; i++) 
-    {
-        var vertex = new THREE.Vector3();
-        particleGeometry.vertices.push(vertex);
-    }
-    var pMaterial = new THREE.ParticleBasicMaterial
-    ({
-        color: 0xfffafa,
-        size: 0.2
-    });
-    particles = new THREE.Points(particleGeometry, pMaterial);
-    scene.add(particles);
-    particles.visible = false;
 }
 
 // mengatur banyaknya batang yang ada di jalur runner
@@ -184,28 +159,45 @@ function handleKeyDown(keyEvent)
 {
     if(jumping)return;
     var validMove=true;
-    if ( keyEvent.keyCode === 37) {//left
-        if(currentLane==middleLane){
+    if ( keyEvent.keyCode === 37) 
+    { // left
+        if(currentLane==middleLane)
+        {
             currentLane=leftLane;
-        }else if(currentLane==rightLane){
+        }
+        else if(currentLane==rightLane)
+        {
             currentLane=middleLane;
-        }else{
+        }
+        else
+        {
             validMove=false;	
         }
-    } else if ( keyEvent.keyCode === 39) {//right
-        if(currentLane==middleLane){
+    } 
+    else if ( keyEvent.keyCode === 39) 
+    { // right
+        if(currentLane==middleLane)
+        {
             currentLane=rightLane;
-        }else if(currentLane==leftLane){
+        }
+        else if(currentLane==leftLane)
+        {
             currentLane=middleLane;
-        }else{
+        }
+        else
+        {
             validMove=false;	
         }
-    }else{
-        if ( keyEvent.keyCode === 38){
+    }
+    else
+    {
+        if ( keyEvent.keyCode === 38)
+        {
 
         }
     }
-    if(validMove){
+    if(validMove)
+    {
         
     }
 }
@@ -230,37 +222,45 @@ function addWorld()
 }
 
 // var model;
-function addModel() {
+function addModel() 
+{
     console.log(getHero);
     var heroChoosed;
-    if(getHero == "Hitler") {
+    if(getHero == "Hitler") 
+    {
         heroChoosed = "model/zidanRunning.fbx"
     }
-    else if(getHero == "Stalin") {
+    else if(getHero == "Stalin") 
+    {
         heroChoosed = "model/zombieRunning.fbx"
     }
-    else if(getHero == "Churchill") {
+    else if(getHero == "Churchill") 
+    {
         heroChoosed = "model/churchRunning.fbx"
     }
     var loader = new FBXLoader();
-    loader.load(heroChoosed, function (model) {
+    loader.load(heroChoosed, function (model) 
+    {
         // var model;
         mixer = new THREE.AnimationMixer(model);
 
         var action = mixer.clipAction(model.animations[0]);
         action.play();
 
-        model.traverse(function (child) {
+        model.traverse(function (child) 
+        {
             if (child.isMesh) {
                 child.castShadow = true;
                 child.receiveShadow = true;
             }
         });
-        if(getHero == "Hitler") {
+        if(getHero == "Hitler") 
+        {
             // heroChoosed = "model/zidanRunning.fbx"
             model.scale.x = model.scale.y = model.scale.z = 0.002;
         }
-        else {
+        else 
+        {
             model.scale.x = model.scale.y = model.scale.z = 0.004;
         }
         // currentLane=middleLane;
@@ -273,7 +273,6 @@ function addModel() {
         scene.add(model);
     });
     // console.log(heromodel.position.y);
-
 }
 
 // cahaya
@@ -333,7 +332,7 @@ function addTrunk(inPath, row, isLeft)
     else 
     {
         newTrunk = createTrunk();
-        var forestAreaAngle = 0;//[1.52,1.57,1.62];
+        var forestAreaAngle = 0; // [1.52,1.57,1.62];
         if (isLeft) 
         {
             forestAreaAngle = 1.68 + Math.random() * 0.1;
@@ -368,20 +367,23 @@ function createTrunk()
 function update() 
 {
     //animate
-    // console.log(radres);
-    if(radres == 'easy') {
+
+    if(radres == 'easy') 
+    {
         rollingSpeed = 0.006;
     }
-    else if(radres == 'hard') {
+    else if(radres == 'hard') 
+    {
         rollingSpeed = 0.008;
     }
-    // console.log(rollingSpeed);
+
     const delta = clock.getDelta();
     if (mixer) mixer.update(delta);
     heromodel.position.x=THREE.Math.lerp(heromodel.position.x, currentLane, 700*clock.getDelta());//clock.getElapsedTime());
-    // console.log(currentLane);
+
     rollingGroundSphere.rotation.x += rollingSpeed;
     trunkReleaseInterval -= 0.0002;
+
     // untuk menampilkan skor yang berjalan di kiri atas layar
     if (clock.getElapsedTime() > trunkReleaseInterval) 
     {
@@ -392,7 +394,8 @@ function update()
             score += 4 * Math.round(trunkReleaseInterval);
             scoreText.innerHTML = score.toString();
             
-            if (score > highScore) {
+            if (score > highScore) 
+            {
                 highScore = score;
                 elementHighScore.innerHTML = highScore;
                 localStorage.setItem("highScore", highScore);
@@ -400,12 +403,12 @@ function update()
         }
     }
 
-    if(hasCollided) {
+    if(hasCollided) 
+    {
         rollingGroundSphere.rotation.x = 0;
     }
 
     doTrunkLogic();
-    // doExplosionLogic();
     render();
     requestAnimationFrame(update); // request next update
 }
@@ -432,7 +435,7 @@ function doTrunkLogic()
             {
                 console.log("hit");
                 hasCollided = true;
-                if(!alert('Why u so noob a? Restart?')){window.location.reload();}
+                if(!alert('WHY R U SO NOOB, HUH? RESTART?')){window.location.reload();}
                 // explode();
             }
         }
@@ -450,50 +453,9 @@ function doTrunkLogic()
     });
 }
 
-function doExplosionLogic() 
-{
-    if (!particles.visible) return;
-    for (var i = 0; i < particleCount; i++) 
-    {
-        particleGeometry.vertices[i].multiplyScalar(explosionPower);
-    }
-    if (explosionPower > 1.005) 
-    {
-        explosionPower -= 0.001;
-    } 
-    else 
-    {
-        particles.visible = false;
-    }
-    particleGeometry.verticesNeedUpdate = true;
-}
-
-function explode() 
-{
-    particles.position.y = 2;
-    particles.position.z = 4.8;
-    particles.position.x = heromodel.position.x;
-    for (var i = 0; i < particleCount; i++) 
-    {
-        var vertex = new THREE.Vector3();
-        vertex.x = -0.2 + Math.random() * 0.4;
-        vertex.y = -0.2 + Math.random() * 0.4;
-        vertex.z = -0.2 + Math.random() * 0.4;
-        particleGeometry.vertices[i] = vertex;
-    }
-    explosionPower = 1.07;
-    particles.visible = true;
-}
-
 function render() 
 {
     renderer.render(scene, camera); // draw
-}
-
-function gameOver() 
-{
-    // cancelAnimationFrame ( globalRenderID );
-    // window.clearInterval ( powerupSpawnIntervalID );
 }
 
 function onWindowResize() 
