@@ -8,12 +8,23 @@
     <title>WhirlWind</title>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+    </style>
+
+    <style>
         body 
         {
             width: 100vw;
             height: 100vh;
             margin: 0;
             overflow: hidden;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        #submit-btn
+        {
+            font-family: 'Nunito', sans-serif;
+            font-weight: bold;
         }
     </style>
 
@@ -41,18 +52,18 @@
                 <form id="myForm" action="" onsubmit="return myFunction()">
                     <h2 style="color: white;">CHOOSE GAME LEVEL</h2>
                     <div class="button-group">
-                        <label class="button-group__btn"><input type="radio" name="group" value="easy" checked/> <span class="button-group__label">Easy</span></label>
-                        <label class="button-group__btn"><input type="radio" name="group" value="hard"/> <span class="button-group__label">Hard</span></label>
+                        <label class="button-group__btn"><input type="radio" name="group" value="easy" checked/> <span class="button-group__label">EASY</span></label>
+                        <label class="button-group__btn"><input type="radio" name="group" value="hard"/> <span class="button-group__label">HARD</span></label>
                     </div>
                     <br>
                     <h2 style="color: white;">CHOOSE GAME HERO</h2>
                     <div class="button-group">
                         <label class="button-group__btn"><input type="radio" name="hero" value="Hitler" checked/> <span
-                                class="button-group__label">Hitler</span></label>
+                                class="button-group__label">HITLER</span></label>
                         <label class="button-group__btn"><input type="radio" name="hero" value="Stalin" /> <span
-                                class="button-group__label">Stalin</span></label>
+                                class="button-group__label">STALIN</span></label>
                         <label class="button-group__btn"><input type="radio" name="hero" value="Churchill" /> <span
-                                class="button-group__label">Churchill</span></label>
+                                class="button-group__label">CHURCHILL</span></label>
                     </div>
                     <input id="submit-btn" type="submit" value="Play" style="cursor: pointer;">
                 </form>
